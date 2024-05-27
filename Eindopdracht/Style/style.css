@@ -1,0 +1,80 @@
+/* costume font */
+@font-face {
+    font-family: Pokemon;
+    src: url(/Font/Pokemon\ Classic.ttf) format('truetype');
+}
+
+h2{
+    font-size: medium;
+    font-family: Pokemon Classic, Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 720px;
+    height: 480px;
+    background-image: url("/images/HappyMochi.png");
+    background-size: cover;
+}
+
+.etenAchtergrond{
+    display: flex;
+    flex-direction: column;
+    width: 720px;
+    height: 480px;
+    background-image: url("/images/MochiEating.png");
+    background-size: cover;
+}
+
+.text {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around;
+    margin-top: 0.5em;
+}
+
+/* Progress-bar Styling */
+
+.progress-bar {
+    width: 7em;
+    height: 1em;
+    /* background-color: rgb(208, 21, 21); */
+    margin-left: 2.5em;
+}
+
+.progress-bar__progress {
+    height: 100%;
+    width: 30%;
+    background-color: rgb(14, 197, 42);
+}
+
+.interactions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    margin-bottom: 1em;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.interactions button {
+    height: 5em;
+    width: 7em;
+    background: none;
+    border: none;
+}
+
+.interactions button img {
+    width: 100%;
+    height: 100%;
+}
