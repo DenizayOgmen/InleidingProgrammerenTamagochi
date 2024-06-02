@@ -80,6 +80,10 @@ const actions = [{
 const header = document.querySelector('header');
 const footer = document.querySelector('footer');
 
+
+/**
+ * Start Screen Elements.
+ */
 const startScreen = document.querySelector('.start-screen');
 const startButton = document.querySelector('.start-button');
 
@@ -94,11 +98,12 @@ const background = document.getElementById("background");
 // ------------------------------------------------------------------------------------------------------------------
 
 /**
- * Decrease alle dog states elke seconden.
+ * Start game interval & haal scherm voor start button weg. 
  */
 function startGame() {
     startScreen.style.display = 'none';
 
+    // Decrease alle dog states elke seconden.
     const gameInterval = setInterval(function () {
         if (checkIfGameOver()) {
             endTamagotchiGame();
@@ -106,8 +111,7 @@ function startGame() {
             // Stop interval loop wanneer gameOver true is.
             return clearInterval(gameInterval);
         }
-
-        const decreaseSpeed = 5;
+        const decreaseSpeed = 1.5;
 
         dogState.hunger -= decreaseSpeed;
         dogState.energy -= decreaseSpeed;
@@ -147,6 +151,7 @@ function callAction(action) {
 }
 
 /**
+ * Speel geluid af aan hand van de File Path die wordt mee gestuurd.
  * https://stackoverflow-com.translate.goog/questions/22766719/stop-audio-after-x-seconds-in-js?_x_tr_sl=en&_x_tr_tl=nl&_x_tr_hl=nl&_x_tr_pto=sc
  */
 function playSound(sound, durationInMs) {
@@ -194,21 +199,26 @@ function changeProgressBar(progressBarId, percentage) {
     }
 
     const progressBarElement = document.getElementById(progressBarId);
+
+    // Meegegeven percentage + '%', om de width van de progressbar aan te passen.
     progressBarElement.style.width = percentage + "%";
 
-    if (percentage <= 20) {
+    if (percentage <= 20) { // Verander progressBar naar rood & verander achtergrond naar boze hond.
         progressBarElement.style.backgroundColor = "red";
         changeBackgroundImage(dogImages.angry);
-    } else if (percentage <= 40) {
+    } else if (percentage <= 40) { // Verander progressBar naar oranje & verander achtergrond naar zielige hond.
         progressBarElement.style.backgroundColor = "orange";
         changeBackgroundImage(dogImages.sad);
-    } else {
+    } else { // Verander progressBar naar groen.
         progressBarElement.style.backgroundColor = "rgb(14, 197, 42)";
     }
 }
 
-function changeBackgroundImage(image) {
-    background.style.backgroundImage = 'url("' + image + '")';
+/**
+ * Verander achtergrond naar toegewezen image path.
+ */
+function changeBackgroundImage(imagePath) {
+    background.style.backgroundImage = 'url("' + imagePath + '")';
 }
 
 /**
@@ -245,6 +255,9 @@ function endTamagotchiGame() {
     removeUI();
 }
 
+/**
+ * Haal UI buttons & progressbars weg.
+ */
 function removeUI() {
     header.style.display = 'none';
     footer.style.display = 'none';
@@ -252,10 +265,17 @@ function removeUI() {
 
 // ------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Click event voor start button.
+ */
 startButton.addEventListener('click', () => {
     startGame();
 });
 
+
+/**
+ * Click events voor footer buttons.
+ */
 foodbutton.addEventListener('click', function () {
     callAction(actions[0]);
 });
