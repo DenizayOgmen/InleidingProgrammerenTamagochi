@@ -26,10 +26,40 @@ body {
 }
 
 .container{
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 720px;
     height: 480px;
+}
+
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    background: rgb(0,0,0,.9);   
+}
+
+.start-button {
+    cursor: pointer;
+    padding: 2em 3em;
+    text-transform: uppercase;
+    font-family: Pokemon Classic, Arial, Helvetica, sans-serif;
+    background: #5C6944;
+    border: solid 1px #3A4622;
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 10px 10px 0 black;
+    transition: box-shadow 400ms ease, background-color 400ms ease;
+}
+
+.start-button:hover {
+    box-shadow: 0 0 0 black;
+    background-color: #7F8F62;
 }
 
 .text {

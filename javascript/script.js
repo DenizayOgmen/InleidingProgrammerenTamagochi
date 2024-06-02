@@ -19,7 +19,7 @@ const dogState = {
     hunger: 100,
     energy: 100,
     hygiene: 100,
-    fun: 100,
+    fun: 100
 };
 
 const gameState = {
@@ -42,8 +42,7 @@ const soundEffects = {
     gameOver: "sounds/game-over-sound.mp3"
 };
 
-const actions = [
-    {
+const actions = [{
         id: 'food',
         image: 'images/MochiEating.png',
         soundeffect: 'sounds/crunch.mp3',
@@ -81,6 +80,9 @@ const actions = [
 const header = document.querySelector('header');
 const footer = document.querySelector('footer');
 
+const startScreen = document.querySelector('.start-screen');
+const startButton = document.querySelector('.start-button');
+
 // Footer Menu Buttons
 const foodbutton = document.getElementById("food");
 const sleepbutton = document.getElementById("sleep");
@@ -89,31 +91,35 @@ const bathbutton = document.getElementById("bath");
 const ballbutton = document.getElementById("ball");
 const background = document.getElementById("background");
 
+// ------------------------------------------------------------------------------------------------------------------
+
 /**
  * Decrease alle dog states elke seconden.
  */
-const gameInterval = setInterval(function () {
-    if (checkIfGameOver()) {
-        endTamagotchiGame();
+function startGame() {
+    startScreen.style.display = 'none';
 
-        // Stop interval loop wanneer gameOver true is.
-        return clearInterval(gameInterval);
-    }
+    const gameInterval = setInterval(function () {
+        if (checkIfGameOver()) {
+            endTamagotchiGame();
 
-    const decreaseSpeed = 5;
+            // Stop interval loop wanneer gameOver true is.
+            return clearInterval(gameInterval);
+        }
 
-    dogState.hunger -= decreaseSpeed;
-    dogState.energy -= decreaseSpeed;
-    dogState.hygiene -= decreaseSpeed;
-    dogState.fun -= decreaseSpeed;
+        const decreaseSpeed = 5;
 
-    changeProgressBar('hunger', dogState.hunger);
-    changeProgressBar('energy', dogState.energy);
-    changeProgressBar('hygiene', dogState.hygiene);
-    changeProgressBar('fun', dogState.fun);
-}, 1000);
+        dogState.hunger -= decreaseSpeed;
+        dogState.energy -= decreaseSpeed;
+        dogState.hygiene -= decreaseSpeed;
+        dogState.fun -= decreaseSpeed;
 
-// ------------------------------------------------------------------------------------------------------------------
+        changeProgressBar('hunger', dogState.hunger);
+        changeProgressBar('energy', dogState.energy);
+        changeProgressBar('hygiene', dogState.hygiene);
+        changeProgressBar('fun', dogState.fun);
+    }, 1000);
+}
 
 /**
  * 1. Change picture.
@@ -128,10 +134,10 @@ function callAction(action) {
         resetProgressBar(action.state);
 
         changeBackgroundImage(action.image);
-    
+
         playSound(action.soundeffect, 3000);
-    
-        const actionInterval = setTimeout(function(){
+
+        const actionInterval = setTimeout(function () {
             if (checkIfGameOver() === false) {
                 changeBackgroundImage(dogImages.happy);
                 gameState.actionIsActive = false;
@@ -146,7 +152,7 @@ function callAction(action) {
 function playSound(sound, durationInMs) {
     const audio = new Audio(sound); // Creëer een nieuw Audio Element.
 
-    audio.volume = 0; // Zet het geluid zachter.
+    audio.volume = 0.4; // Zet het geluid zachter.
     audio.play();
 
     if (durationInMs !== undefined) { // Speel geluid helemaal af als de tijd niet is aangegeven.
@@ -222,7 +228,7 @@ function checkIfGameOver() {
         return true;
     } else {
         return false;
-    }    
+    }
 }
 
 /**
@@ -231,7 +237,7 @@ function checkIfGameOver() {
  * 3. Play game over sound.
  * 4. Remove header & footer UI elementen.
  */
-function endTamagotchiGame () {
+function endTamagotchiGame() {
     gameState.gameOver = true;
 
     playSound(soundEffects.gameOver);
@@ -246,23 +252,27 @@ function removeUI() {
 
 // ------------------------------------------------------------------------------------------------------------------
 
-foodbutton.addEventListener('click', function() {
+startButton.addEventListener('click', () => {
+    startGame();
+});
+
+foodbutton.addEventListener('click', function () {
     callAction(actions[0]);
 });
 
-sleepbutton.addEventListener('click', function() {
+sleepbutton.addEventListener('click', function () {
     callAction(actions[1]);
 });
 
-wcbutton.addEventListener('click', function() {
+wcbutton.addEventListener('click', function () {
     callAction(actions[2]);
 });
 
-bathbutton.addEventListener('click', function() {
+bathbutton.addEventListener('click', function () {
     callAction(actions[3]);
 });
 
-ballbutton.addEventListener('click', function() {
+ballbutton.addEventListener('click', function () {
     callAction(actions[4]);
 });
 
@@ -278,4 +288,5 @@ ballbutton.addEventListener('click', function() {
     https://www.myinstants.com/en/instant/bubbles/
     https://www.myinstants.com/en/instant/toilet-flush-95497/
     https://www.myinstants.com/en/instant/game-over-titanic-69465/
+    https://stackoverflow.com/questions/72383410/playing-sound-with-no-click-interaction-within-js-doesnt-work
  */
