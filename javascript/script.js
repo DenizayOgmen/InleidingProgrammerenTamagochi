@@ -1,4 +1,3 @@
-console.log("😽");
 // Opbouw van code volgorde:
 
 // 1 - alle constanten
