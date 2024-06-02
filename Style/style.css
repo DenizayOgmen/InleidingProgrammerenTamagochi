@@ -18,44 +18,58 @@ body {
     height: 100vh;
 }
 
+#background{
+    width: 720px;
+    height: 480px;
+    background-image: url("../images/HappyMochi.png");
+    background-size: cover;
+}
+
 .container{
     display: flex;
     flex-direction: column;
     width: 720px;
     height: 480px;
-    background-image: url("/images/HappyMochi.png");
-    background-size: cover;
-}
-
-.etenAchtergrond{
-    display: flex;
-    flex-direction: column;
-    width: 720px;
-    height: 480px;
-    background-image: url("/images/MochiEating.png");
-    background-size: cover;
 }
 
 .text {
     display: flex;
     flex-direction: row; 
-    justify-content: space-around;
-    margin-top: 0.5em;
+    justify-content: space-between;
+    margin-top: 1.5em;
+    margin-left: 5em;
+    margin-right: 5em;
 }
 
 /* Progress-bar Styling */
 
+.progress-bar-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
 .progress-bar {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-around; */
+    
     width: 7em;
     height: 1em;
-    /* background-color: rgb(208, 21, 21); */
+    background-color: white;
+    border: solid 1px #000;
+    border-radius: 3px;
     margin-left: 2.5em;
 }
 
 .progress-bar__progress {
     height: 100%;
-    width: 30%;
+    width: 100%;
     background-color: rgb(14, 197, 42);
+    border: 2px;
+    transition: background-color 300ms, width 300ms;
 }
 
 .interactions {
@@ -72,9 +86,14 @@ body {
     width: 7em;
     background: none;
     border: none;
+    cursor: pointer;
 }
 
 .interactions button img {
     width: 100%;
     height: 100%;
+}
+
+.interactions button:hover {
+    transform: scale(1.1);
 }
